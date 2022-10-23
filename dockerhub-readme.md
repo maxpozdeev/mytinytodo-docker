@@ -1,15 +1,15 @@
 Sources  - https://github.com/maxpozdeev/mytinytodo-docker
 
-# Examples compose.yml for docker-compose
+# Examples of compose.yml for docker-compose
 
-Use Sqlite
+Use Sqlite:
 
 ```
 volumes:
   html:
 services:
   web:
-    image: maxpozdeev/mytinytodo:1.7-beta
+    image: maxpozdeev/mytinytodo:1.7-apache
     ports:
       - 8081:80
     restart: always
@@ -40,7 +40,7 @@ services:
     expose:
       - 3306
   web:
-    image: maxpozdeev/mytinytodo:1.7-beta-apache
+    image: maxpozdeev/mytinytodo:1.7-apache
     ports:
       - 80:80
     restart: always
@@ -55,3 +55,12 @@ services:
     volumes:
       - html_data:/var/www/html
 ```
+
+# Upgrade
+
+To use new version of myTinyTodo:
+
+- Pull new image from hub and recreate container:   
+  `docker-compose down && docker-compose build --pull && docker-compose up`
+- Execute in the running container:  
+  `/usr/local/bin/reinstall-mytinytodo.sh`
