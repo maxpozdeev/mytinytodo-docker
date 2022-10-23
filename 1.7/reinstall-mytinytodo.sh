@@ -7,7 +7,9 @@ cd /var/www/html
 find . -maxdepth 1 ! -name db ! -name config.php ! -name . -exec rm -rf "{}" \;
 
 # db/todolist.db and config.php are not present in archive, should not be overwritten even without -k flag.
-tar -xzf -k /usr/src/mytinytodo.tar.gz --strip-components 1 
+tar -xzf /usr/src/mytinytodo.tar.gz --strip-components 1 
+tar -xzf ./ext/extensions.tar.gz -C ./ext/
+rm -f ./ext/extensions.tar.gz
 
 if [[ "$MTT_DB_TYPE" != '' && ! -e db/docker-config.php ]]; then
     rnd="$(head -c1m /dev/urandom | sha1sum | head -c40)"

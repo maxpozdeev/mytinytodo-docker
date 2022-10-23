@@ -41,10 +41,10 @@ RUN { \
 COPY --chown=www-data:www-data docker-config.php /usr/src/
 
 RUN set -eux; \
-	version='1.7-beta'; \
+	version='1.7.0'; \
 	curl -o /usr/src/mytinytodo.tar.gz -fL "https://github.com/maxpozdeev/mytinytodo/releases/download/v$version/mytinytodo-v$version.tar.gz"; 
 
-VOLUME /var/www/html
+#VOLUME /var/www/html
 
 #ENV MTT_DB_TYPE=${MTT_DB_TYPE:-sqlite}
 COPY reinstall-mytinytodo.sh /usr/local/bin/

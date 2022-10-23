@@ -9,7 +9,9 @@ if [[ "$1" == apache2* ]] || [ "$1" = 'php-fpm' ]; then
 
     if [ ! -e index.php ]; then
         echo >&2 "myTinyTodo not found, copying..."
-        tar -xzf /usr/src/mytinytodo.tar.gz --strip-components 1 -C ./
+        tar -xzf /usr/src/mytinytodo.tar.gz -k --strip-components 1 -C ./
+        tar -xzf ./ext/extensions.tar.gz -C ./ext/
+        rm -f ./ext/extensions.tar.gz
         if [ "$uid" = '0' ]; then
             chown -R www-data:www-data * || true
         fi
