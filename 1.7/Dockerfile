@@ -38,17 +38,14 @@ RUN { \
 		echo 'html_errors = Off'; \
 	} > /usr/local/etc/php/conf.d/mtt-errors.ini
 
+COPY mytinytodo.tar.gz /usr/src/
 COPY --chown=www-data:www-data docker-config.php /usr/src/
 
-RUN set -eux; \
-	version='1.7.0'; \
-	curl -o /usr/src/mytinytodo.tar.gz -fL "https://github.com/maxpozdeev/mytinytodo/releases/download/v$version/mytinytodo-v$version.tar.gz"; 
-
-#VOLUME /var/www/html
+COPY reinstall-mytinytodo.sh /usr/local/bin/
+COPY docker-entrypoint.sh    /usr/local/bin/
 
 #ENV MTT_DB_TYPE=${MTT_DB_TYPE:-sqlite}
-COPY reinstall-mytinytodo.sh /usr/local/bin/
+#VOLUME /var/www/html
 
-COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
