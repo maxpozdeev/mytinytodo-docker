@@ -45,7 +45,7 @@ COPY --chown=www-data:www-data docker-config.php /usr/src/
 COPY reinstall-mytinytodo.sh /usr/local/bin/
 COPY docker-entrypoint.sh    /usr/local/bin/
 
-#ENV MYTINYTODO_VERSION 1.8-beta2
+#ENV MYTINYTODO_VERSION 1.8.1
 
 VOLUME /var/www/html
 
