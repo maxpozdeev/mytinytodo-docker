@@ -9,7 +9,7 @@ docker run --rm --name mytinytodo -p 8080:80 -v "$PWD/html":/var/www/html \
 
 # Examples of compose.yml for docker-compose
 
-Use SQLite:
+### SQLite
 
 ```
 volumes:
@@ -26,7 +26,7 @@ services:
       - html:/var/www/html
 ```
 
-Use MariaDB:
+### MariaDB
 
 ```
 volumes:
@@ -35,7 +35,7 @@ volumes:
   
 services:
   db:
-    image: mariadb:10.6
+    image: mariadb:10.11
     restart: unless-stopped
     environment:
       - MARIADB_ROOT_PASSWORD=mttRoot
@@ -63,7 +63,7 @@ services:
       - html_data:/var/www/html
 ```
 
-Use PostgreSQL:
+### PostgreSQL
 
 ```
 volumes:
@@ -73,14 +73,13 @@ volumes:
 services:
   db:
     image: postgres:16
-    userns_mode: keep-id
     restart: unless-stopped
     environment:
       POSTGRES_PASSWORD: mtt
       POSTGRES_USER: mtt
       POSTGRES_DB: mytinytodo
     volumes:
-      - /db_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
   web:
     image: maxpozdeev/mytinytodo:1.8-apache
     ports:
@@ -101,7 +100,7 @@ services:
 
 To use new version of myTinyTodo:
 
-- Pull new image from hub and recreate container:   
+- Pull new image from the registry and recreate container:   
   `docker-compose down && docker-compose build --pull && docker-compose up`
 - Execute in the running container:  
   `/usr/local/bin/reinstall-mytinytodo.sh`
