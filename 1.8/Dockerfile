@@ -1,4 +1,6 @@
-FROM php:8.2-apache
+FROM php:8.4-apache
+
+#ENV MYTINYTODO_VERSION 1.8.3
 
 # persistent dependencies
 RUN set -eux; \
@@ -44,8 +46,6 @@ COPY --chown=www-data:www-data docker-config.php /usr/src/
 
 COPY reinstall-mytinytodo.sh /usr/local/bin/
 COPY docker-entrypoint.sh    /usr/local/bin/
-
-#ENV MYTINYTODO_VERSION 1.8.1
 
 VOLUME /var/www/html
 
